@@ -23,7 +23,8 @@ jobs:
           rustup default stable
           rustup target add aarch64-apple-darwin
       - name: Test on runner architecture
-        run: CARGO_BUILD_TARGET="$(rustc -vV | sed -n 's/^host: //p')" cargo test --locked
+        run: |
+          CARGO_BUILD_TARGET="$(rustc -vV | sed -n 's/^host: //p')" cargo test --locked
       - name: Build and verify DMG
         run: sh scripts/dmg.sh
       - name: Publish prerelease
