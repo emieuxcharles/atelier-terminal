@@ -1,0 +1,12 @@
+/target/
+/.toolchain/
+/dist/
+*.log
+.DS_Store
+
+# Artefacts des dépendances vendoriées et secrets locaux
+**/target/
+.env
+.env.*
+*.p12
+*.p8

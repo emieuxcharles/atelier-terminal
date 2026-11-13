@@ -1,0 +1,272 @@
+{
+  "before": [
+    {
+      "close_ms": 4.772042,
+      "lines_per_pane": 100000,
+      "output_ms": 162.100167,
+      "panes": 1,
+      "pty_roundtrip_p50_ms": 1.088042,
+      "pty_roundtrip_p95_ms": 1.50725,
+      "rss_after_close_kib": 73952,
+      "rss_before_kib": 7680,
+      "rss_loaded_kib": 54096,
+      "survivors": [],
+      "sync_p50_ms": 0.971375,
+      "sync_p95_ms": 1.1335410000000001
+    },
+    {
+      "close_ms": 7.1325,
+      "lines_per_pane": 100000,
+      "output_ms": 429.47950000000003,
+      "panes": 4,
+      "pty_roundtrip_p50_ms": 1.2711249999999998,
+      "pty_roundtrip_p95_ms": 1.7554999999999998,
+      "rss_after_close_kib": 207488,
+      "rss_before_kib": 74016,
+      "rss_loaded_kib": 190896,
+      "survivors": [],
+      "sync_p50_ms": 5.040584,
+      "sync_p95_ms": 5.743542
+    },
+    {
+      "close_ms": 12.158125,
+      "lines_per_pane": 100000,
+      "output_ms": 923.759125,
+      "panes": 8,
+      "pty_roundtrip_p50_ms": 1.3221669999999999,
+      "pty_roundtrip_p95_ms": 1.6367090000000002,
+      "rss_after_close_kib": 383904,
+      "rss_before_kib": 207488,
+      "rss_loaded_kib": 377120,
+      "survivors": [],
+      "sync_p50_ms": 10.793083,
+      "sync_p95_ms": 12.195375
+    }
+  ],
+  "after": [
+    {
+      "close_ms": 12.023375,
+      "lines_per_pane": 100000,
+      "output_ms": 172.172417,
+      "panes": 1,
+      "pty_roundtrip_p50_ms": 0.038042,
+      "pty_roundtrip_p95_ms": 0.084875,
+      "rss_after_close_kib": 32112,
+      "rss_before_kib": 7664,
+      "rss_loaded_kib": 32960,
+      "survivors": [],
+      "sync_p50_ms": 0.010542,
+      "sync_p95_ms": 0.015125
+    },
+    {
+      "close_ms": 13.318708,
+      "lines_per_pane": 100000,
+      "output_ms": 445.27108300000003,
+      "panes": 4,
+      "pty_roundtrip_p50_ms": 0.0805,
+      "pty_roundtrip_p95_ms": 0.127,
+      "rss_after_close_kib": 102480,
+      "rss_before_kib": 32192,
+      "rss_loaded_kib": 106608,
+      "survivors": [],
+      "sync_p50_ms": 0.041875,
+      "sync_p95_ms": 0.0665
+    },
+    {
+      "close_ms": 14.545375,
+      "lines_per_pane": 100000,
+      "output_ms": 945.6011669999999,
+      "panes": 8,
+      "pty_roundtrip_p50_ms": 0.039875,
+      "pty_roundtrip_p95_ms": 0.067459,
+      "rss_after_close_kib": 198544,
+      "rss_before_kib": 102480,
+      "rss_loaded_kib": 212656,
+      "survivors": [],
+      "sync_p50_ms": 0.084375,
+      "sync_p95_ms": 0.08825000000000001
+    }
+  ],
+  "cleanup": [
+    [
+      {
+        "cycle": 0,
+        "heap_after_close_bytes": 3287008,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191731248,
+        "rss_after_close_kib": 183296,
+        "rss_loaded_kib": 191568,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 1,
+        "heap_after_close_bytes": 3287984,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191732320,
+        "rss_after_close_kib": 191408,
+        "rss_loaded_kib": 199808,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 2,
+        "heap_after_close_bytes": 3288832,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191733168,
+        "rss_after_close_kib": 192064,
+        "rss_loaded_kib": 200496,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 3,
+        "heap_after_close_bytes": 3289680,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191734016,
+        "rss_after_close_kib": 194064,
+        "rss_loaded_kib": 202512,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 4,
+        "heap_after_close_bytes": 3290528,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191734864,
+        "rss_after_close_kib": 197808,
+        "rss_loaded_kib": 206256,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 5,
+        "heap_after_close_bytes": 3291504,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191735840,
+        "rss_after_close_kib": 199872,
+        "rss_loaded_kib": 208320,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 6,
+        "heap_after_close_bytes": 3292352,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191736688,
+        "rss_after_close_kib": 200912,
+        "rss_loaded_kib": 209360,
+        "survivors": [],
+        "tracked_processes": 16
+      },
+      {
+        "cycle": 7,
+        "heap_after_close_bytes": 3293200,
+        "heap_initial_bytes": 103184,
+        "heap_loaded_bytes": 191737536,
+        "rss_after_close_kib": 204592,
+        "rss_loaded_kib": 213040,
+        "survivors": [],
+        "tracked_processes": 16
+      }
+    ]
+  ],
+  "input_under_load": [
+    {
+      "keystrokes": 100,
+      "log_writers": 7,
+      "max_ms": 2.172583,
+      "p50_ms": 0.469291,
+      "p95_ms": 1.814459,
+      "panes": 8
+    }
+  ],
+  "gui_before": [
+    {
+      "binary": "/tmp/atelier-before-perf",
+      "panes": 1,
+      "lines_per_pane": 100000,
+      "startup_and_write_s": 0.742,
+      "cpu_total_s": 0.35,
+      "idle_cpu_s_over_3s": 0.11,
+      "rss_mib": 198.5,
+      "rss_idle_delta_mib": -3.4,
+      "child_count": 1
+    },
+    {
+      "after_app_exit_survivors": []
+    },
+    {
+      "binary": "/tmp/atelier-before-perf",
+      "panes": 4,
+      "lines_per_pane": 100000,
+      "startup_and_write_s": 0.426,
+      "cpu_total_s": 1.23,
+      "idle_cpu_s_over_3s": 0.43,
+      "rss_mib": 403.1,
+      "rss_idle_delta_mib": 148.7,
+      "child_count": 4
+    },
+    {
+      "after_app_exit_survivors": []
+    },
+    {
+      "binary": "/tmp/atelier-before-perf",
+      "panes": 8,
+      "lines_per_pane": 100000,
+      "startup_and_write_s": 0.578,
+      "cpu_total_s": 2.01,
+      "idle_cpu_s_over_3s": 0.0,
+      "rss_mib": 274.0,
+      "rss_idle_delta_mib": -0.1,
+      "child_count": 8
+    },
+    {
+      "after_app_exit_survivors": []
+    }
+  ],
+  "gui_after": [
+    {
+      "binary": "target/release/atelier-terminal",
+      "panes": 1,
+      "lines_per_pane": 100000,
+      "startup_and_write_s": 0.48,
+      "cpu_total_s": 0.26,
+      "idle_cpu_s_over_3s": 0.01,
+      "rss_mib": 157.2,
+      "rss_idle_delta_mib": -0.1,
+      "child_count": 1
+    },
+    {
+      "after_app_exit_survivors": []
+    },
+    {
+      "binary": "target/release/atelier-terminal",
+      "panes": 4,
+      "lines_per_pane": 100000,
+      "startup_and_write_s": 0.314,
+      "cpu_total_s": 0.66,
+      "idle_cpu_s_over_3s": 0.01,
+      "rss_mib": 189.6,
+      "rss_idle_delta_mib": -0.1,
+      "child_count": 4
+    },
+    {
+      "after_app_exit_survivors": []
+    },
+    {
+      "binary": "target/release/atelier-terminal",
+      "panes": 8,
+      "lines_per_pane": 100000,
+      "startup_and_write_s": 0.53,
+      "cpu_total_s": 1.6,
+      "idle_cpu_s_over_3s": 0.0,
+      "rss_mib": 205.6,
+      "rss_idle_delta_mib": -12.2,
+      "child_count": 8
+    },
+    {
+      "after_app_exit_survivors": []
+    }
+  ]
+}

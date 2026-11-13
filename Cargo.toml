@@ -1,0 +1,17 @@
+[package]
+name = "atelier-terminal"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+eframe = { version = "0.31", default-features = false, features = ["default_fonts", "glow"] }
+egui_term = { path = "vendor/egui_term" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+libc = "0.2"
+muda = { path = "vendor/muda" }
+
+[profile.release]
+lto = "thin"
+strip = true
+
