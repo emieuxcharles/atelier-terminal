@@ -36,7 +36,7 @@ impl NativeMenu {
         let settings = MenuItem::with_id("settings", "Réglages…", true,
             Some(Accelerator::new(Some(Modifiers::SUPER), Code::Comma)));
         let sidebar = MenuItem::with_id("toggle-sidebar", "Masquer la barre des projets", true,
-            Some(Accelerator::new(Some(Modifiers::SUPER | Modifiers::ALT), Code::KeyB)));
+            Some(Accelerator::new(Some(Modifiers::SUPER), Code::KeyB)));
         let zoom = MenuItem::with_id("toggle-zoom", "Agrandir le panneau actif", true,
             Some(Accelerator::new(Some(Modifiers::SUPER | Modifiers::ALT), Code::Enter)));
         let project_navigation = [

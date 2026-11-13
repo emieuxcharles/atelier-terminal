@@ -350,7 +350,7 @@ impl Atelier {
             ("Rouvrir le dernier projet fermé", "⌘⇧T", ReopenProject, !self.closed_projects.is_empty()),
             ("Diviser le terminal", "⌘D", Split, has_project),
             ("Réglages…", "⌘,", Settings, true),
-            (if self.sidebar_visible { "Masquer la barre des projets" } else { "Afficher la barre des projets" }, "⌥⌘B", ToggleSidebar, true),
+            (if self.sidebar_visible { "Masquer la barre des projets" } else { "Afficher la barre des projets" }, "⌘B", ToggleSidebar, true),
             (if zoomed { "Rétablir les panneaux" } else { "Agrandir le panneau actif" }, "⌥⌘Entrée", ToggleZoom, has_project),
             ("Projet précédent", "⌥⌘↑", PreviousProject, self.projects.len() > 1),
             ("Projet suivant", "⌥⌘↓", NextProject, self.projects.len() > 1),
@@ -509,7 +509,7 @@ impl eframe::App for Atelier {
                     // Keep the native macOS close/minimize/fullscreen controls unobstructed.
                     if cfg!(target_os = "macos") { ui.add_space(70.0); }
                     ui.add_enabled_ui(!blocked, |ui| {
-                        if chrome::button(ui, chrome::Icon::Sidebar, "Afficher/masquer les projets · ⌥⌘B", egui::vec2(28.0,28.0)).clicked() { toolbar_action=Some(native_menu::Action::ToggleSidebar); }
+                        if chrome::button(ui, chrome::Icon::Sidebar, "Afficher/masquer les projets · ⌘B", egui::vec2(28.0,28.0)).clicked() { toolbar_action=Some(native_menu::Action::ToggleSidebar); }
                     });
                     let name = self.projects.get(self.selected).map(|p| p.directory.display().to_string()).unwrap_or_else(|| "Rechercher un projet…".into());
                     let width = (ui.available_width() - 104.0).max(80.0);

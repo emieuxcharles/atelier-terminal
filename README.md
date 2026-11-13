@@ -38,7 +38,7 @@ Ouvrez un dossier comme projet, puis divisez son terminal en plusieurs panneaux.
 | Projet précédent / suivant | ⌥⌘↑ / ↓ |
 | Panneau précédent / suivant | ⌥⌘← / → |
 | Agrandir / rétablir le panneau | ⌥⌘Entrée |
-| Afficher / masquer les projets | ⌥⌘B |
+| Afficher / masquer les projets | ⌘B |
 
 La palette donne aussi accès aux actions Docker Compose : démarrer, arrêter, consulter les logs et ouvrir un shell dans un conteneur. Docker et son plugin Compose doivent être installés. Les badges distinguent les sessions locales, SSH et Docker reconnues par Atelier.
 

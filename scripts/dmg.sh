@@ -7,9 +7,11 @@ ARCH=$(lipo -archs dist/Atelier.app/Contents/MacOS/atelier-terminal)
 DMG="dist/Atelier-${VERSION}-macOS-${ARCH}.dmg"
 STAGE=$(mktemp -d "${TMPDIR:-/tmp}/atelier-dmg.XXXXXX")
 trap 'rm -rf "$STAGE"' EXIT HUP INT TERM
-ditto dist/Atelier.app "$STAGE/Atelier.app"
-ln -s /Applications "$STAGE/Applications"
-hdiutil create -volname Atelier -srcfolder "$STAGE" -ov -format UDZO "$DMG"
+mkdir "$STAGE/payload"
+ditto dist/Atelier.app "$STAGE/payload/Atelier.app"
+ln -s /Applications "$STAGE/payload/Applications"
+hdiutil makehybrid -hfs -hfs-volume-name Atelier -o "$STAGE/source.dmg" "$STAGE/payload"
+hdiutil convert "$STAGE/source.dmg" -ov -format UDZO -o "$DMG"
 hdiutil verify "$DMG"
 codesign --verify --deep --strict dist/Atelier.app
 (cd dist && shasum -a 256 "$(basename "$DMG")") > "$DMG.sha256"
