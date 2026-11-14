@@ -1,4 +1,7 @@
-Première version expérimentale d'Atelier, terminal macOS organisé par projets.
+Atelier 0.1.1 — mise à jour expérimentale du terminal macOS organisé par projets.
+
+- Palette de commandes affinée : typographie et lignes compactes, catégories, recherche discrète et raccourcis en touches.
+- Création et vérification du DMG corrigées ; version de l’application synchronisée avec la release.
 
 - ⌘B affiche ou masque la barre des projets.
 - Projets persistants, panneaux multiples, palette de commandes et thèmes clair/sombre.

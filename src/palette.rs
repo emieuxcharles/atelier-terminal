@@ -62,12 +62,40 @@ impl Palette {
         let enter = ctx.input_mut(|i| i.consume_key(egui::Modifiers::NONE, egui::Key::Enter));
         let up = ctx.input_mut(|i| i.consume_key(egui::Modifiers::NONE, egui::Key::ArrowUp));
         let down = ctx.input_mut(|i| i.consume_key(egui::Modifiers::NONE, egui::Key::ArrowDown));
-        let response = egui::Modal::new(egui::Id::new("command-palette")).show(ctx, |ui| {
-            ui.set_width(560.0);
-            ui.heading(title);
-            if !subtitle.is_empty() {ui.label(subtitle);}
-            let search = ui.add(egui::TextEdit::singleline(&mut self.query)
-                .hint_text(if title == "Docker Compose" {"Rechercher un service ou une action Docker…"} else {"Rechercher un projet, un panneau ou une action…"}).desired_width(f32::INFINITY));
+        let response = egui::Modal::new(egui::Id::new("command-palette"))
+            .frame(egui::Frame::new()
+                .fill(egui::Color32::from_rgb(37, 39, 41))
+                .stroke(egui::Stroke::new(1.0_f32, egui::Color32::from_rgb(58, 60, 63)))
+                .corner_radius(8)
+                .inner_margin(14.0))
+            .show(ctx, |ui| {
+            ui.set_width(540.0_f32.min((ctx.screen_rect().width() - 64.0).max(180.0)));
+            ui.spacing_mut().item_spacing.y = 2.0;
+            ui.visuals_mut().override_text_color = Some(egui::Color32::from_rgb(157, 158, 160));
+            if title != "Palette de commandes" {
+                ui.label(egui::RichText::new(title).size(14.0).color(egui::Color32::from_rgb(230, 230, 232)));
+                if !subtitle.is_empty() { ui.label(subtitle); }
+                ui.add_space(10.0);
+            }
+            let search = egui::Frame::new()
+                .fill(egui::Color32::from_rgb(24, 26, 28))
+                .stroke(egui::Stroke::new(1.0_f32, egui::Color32::from_rgb(112, 139, 172)))
+                .corner_radius(6)
+                .inner_margin(egui::Margin::symmetric(10, 7))
+                .show(ui, |ui| {
+                    ui.horizontal(|ui| {
+                        ui.label(egui::RichText::new("⌘").size(17.0));
+                        let search = ui.add_sized([ui.available_width() - 34.0, 20.0],
+                            egui::TextEdit::singleline(&mut self.query)
+                                .font(egui::FontId::proportional(13.0))
+                                .text_color(egui::Color32::from_rgb(235, 235, 237))
+                                .frame(false)
+                                .hint_text(if title == "Docker Compose" { "Rechercher un service…" } else { "Rechercher une commande…" }));
+                        ui.label(egui::RichText::new("Esc").size(11.0));
+                        search
+                    }).inner
+                }).inner;
+            ui.add_space(6.0);
             search.request_focus();
             if search.changed() { self.selected = 0; }
             let mut matches: Vec<_> = entries.iter().filter_map(|entry| {
@@ -81,16 +109,47 @@ impl Palette {
                 if up { self.selected = (self.selected + matches.len() - 1) % matches.len(); }
                 if enter { chosen = Some(matches[self.selected].1.target.clone()); }
             } else { ui.label("Aucun résultat."); }
-            egui::ScrollArea::vertical().max_height(340.0).show(ui, |ui| {
+            egui::ScrollArea::vertical().max_height((ctx.screen_rect().height() * 0.55).min(360.0)).show(ui, |ui| {
+                let mut previous_group = "";
                 for (index, (_, entry)) in matches.iter().enumerate() {
-                    let text = format!("{}    {}\n{}", entry.label, entry.shortcut, entry.detail);
-                    let row = ui.add_sized([ui.available_width(), 46.0], egui::Button::new(text).selected(index == self.selected));
-                    if (up || down || search.changed()) && index == self.selected { row.scroll_to_me(None); }
+                    let group = match entry.target {
+                        Target::Project(_) => "Projets",
+                        Target::Pane(_) => "Panneaux",
+                        Target::Directory(_) => "Dossiers récents",
+                        Target::Compose(_) => "Docker Compose",
+                        Target::Action(_) => "Commandes",
+                    };
+                    if group != previous_group {
+                        ui.add_space(6.0);
+                        ui.label(egui::RichText::new(group).size(11.0).color(egui::Color32::from_rgb(122, 124, 127)));
+                        ui.add_space(2.0);
+                        previous_group = group;
+                    }
+                    let detail = !entry.detail.is_empty() && entry.detail != "Action";
+                    let (rect, row) = ui.allocate_exact_size(egui::vec2(ui.available_width(), if detail { 42.0 } else { 28.0 }), egui::Sense::click());
+                    let selected = index == self.selected;
+                    if selected || row.hovered() {
+                        ui.painter().rect_filled(rect, 4.0, if selected { egui::Color32::from_rgb(57, 59, 62) } else { egui::Color32::from_rgb(46, 48, 51) });
+                    }
+                    let mut right = rect.right() - 8.0;
+                    let shortcut = entry.shortcut.replace('⌘', "cmd+").replace('⇧', "shift+").replace('⌥', "alt+");
+                    for key in shortcut.split('+').rev().filter(|key| !key.is_empty()) {
+                        let galley = ui.painter().layout_no_wrap(key.trim().to_owned(), egui::FontId::proportional(10.0), egui::Color32::from_rgb(145, 147, 150));
+                        let badge = egui::Rect::from_min_size(egui::pos2(right - galley.size().x - 8.0, rect.center().y - 8.5), egui::vec2(galley.size().x + 8.0, 17.0));
+                        ui.painter().rect(badge, 3.0, egui::Color32::from_rgb(42, 44, 46), egui::Stroke::new(1.0_f32, egui::Color32::from_rgb(65, 67, 70)), egui::StrokeKind::Inside);
+                        ui.painter().galley(badge.center() - galley.size() * 0.5, galley, egui::Color32::WHITE);
+                        right = badge.left() - 4.0;
+                    }
+                    let text_rect = egui::Rect::from_min_max(rect.min + egui::vec2(8.0, 0.0), egui::pos2(right - 8.0, rect.bottom()));
+                    let painter = ui.painter().with_clip_rect(text_rect);
+                    painter.text(egui::pos2(text_rect.left(), rect.center().y - if detail { 7.0 } else { 0.0 }), egui::Align2::LEFT_CENTER, &entry.label, egui::FontId::proportional(13.0), if selected { egui::Color32::from_rgb(235, 235, 237) } else { egui::Color32::from_rgb(170, 172, 175) });
+                    if detail {
+                        painter.text(egui::pos2(text_rect.left(), rect.center().y + 9.0), egui::Align2::LEFT_CENTER, &entry.detail, egui::FontId::proportional(11.0), egui::Color32::from_rgb(125, 128, 132));
+                    }
+                    if (up || down || search.changed()) && selected { row.scroll_to_me(None); }
                     if row.clicked() { chosen = Some(entry.target.clone()); }
                 }
             });
-            ui.separator();
-            ui.weak("Flèches : choisir · Entrée : exécuter · Échap : fermer");
         });
         if escape || response.backdrop_response.clicked() || chosen.is_some() { self.open = false; }
         chosen

@@ -3,6 +3,7 @@ set -eu
 cd "$(dirname "$0")/.."
 export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-11.0}"
 sh scripts/cargo.sh build --release --locked
+VERSION=$(sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml | head -1)
 APP="dist/Atelier.app"
 mkdir -p "$APP/Contents/MacOS"
 BINARY="target/${CARGO_BUILD_TARGET:+$CARGO_BUILD_TARGET/}release/atelier-terminal"
@@ -16,8 +17,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <key>CFBundleIdentifier</key><string>local.atelier.terminal</string>
 <key>CFBundleExecutable</key><string>atelier-terminal</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>0.1.0</string>
-<key>CFBundleVersion</key><string>1</string>
+<key>CFBundleShortVersionString</key><string>${VERSION}</string>
+<key>CFBundleVersion</key><string>${VERSION}</string>
 <key>LSMinimumSystemVersion</key><string>${MACOSX_DEPLOYMENT_TARGET}</string>
 <key>NSHighResolutionCapable</key><true/>
 </dict></plist>
